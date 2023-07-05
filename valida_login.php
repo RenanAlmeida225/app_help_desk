@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $authenticatedUser = false;
 $users = array(
     array("email" => "adm@test.com", "password" => "123456"),
@@ -13,8 +15,11 @@ foreach ($users as $user) {
 }
 
 if ($authenticatedUser) {
-    echo "Usuário autenticado";
+    $_SESSION['autenticado'] = 'SIM';
+    //echo "Usuário autenticado";
+    header("Location:home.php");
 } else {
+    $_SESSION['autenticado'] = 'NAO';
     header("Location: index.php?login=erro");
 }
 
